@@ -10,7 +10,7 @@ theme = "paper"
   color = 'linen'                           # linen, wheat, gray, light
 
   # header social icons
-  twitter = 'MumuOneste33579'               # twitter.com/YOUR_TWITTER_ID
+  twitter = 'onestepmumu'               # twitter.com/YOUR_TWITTER_ID
   github = 'onestepmumu'                 # github.com/YOUR_GITHUB_ID
   rss = true                                # show rss icon
 
