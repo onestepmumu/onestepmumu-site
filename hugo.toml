@@ -3,7 +3,7 @@ languageCode = 'en-us'
 title = 'ONESTEPMUMU'
 theme = "paper"
 
-disqusShortname = 'YOUR_DISQUS_SHORTNAME'   # use disqus comments
+#disqusShortname = 'YOUR_DISQUS_SHORTNAME'   # use disqus comments
 
 [params]
   # color style
