@@ -1,4 +1,4 @@
-baseURL = 'latentpng.com'
+#baseURL = 'latentpng.com'
 languageCode = 'en-us'
 title = 'ONESTEPMUMU'
 theme = "paper"
