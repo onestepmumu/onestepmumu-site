@@ -1,29 +1,30 @@
-name: Build and Deploy Hugo Site
+name: Build and Deploy Hugo Site to Cloudflare Pages
 
 on:
   push:
     branches:
-      - main  # Set this to your default branch
+      - main  # 这里假设 'main' 是您的主分支
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.82.0'  # Specify your Hugo version here
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'v0.126.1'  # 替换为您需要的 Hugo 版本
 
-      - name: Build Hugo
-        run: hugo --minify
+    - name: Build Hugo Site
+      run: hugo --gc --minify
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'your-project-name'  # Your project name in Cloudflare Pages
-          branch: 'main'
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/pages-action@1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: 'your-project-name'  # 替换为您在 Cloudflare Pages 中的项目名称
+        branch: main  # 确保与 Cloudflare 中配置的部署分支一致
+
