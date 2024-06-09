@@ -18,7 +18,7 @@ jobs:
         hugo-version: 'v0.126.1'  # 替换为您需要的 Hugo 版本
 
     - name: Build Hugo Site
-      run: hugo --gc --minify
+      run: hugo
 
     - name: Deploy to Cloudflare Pages
       uses: cloudflare/pages-action@1
