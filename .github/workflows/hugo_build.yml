@@ -25,6 +25,7 @@ jobs:
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        projectName: 'onestepmumu-site'  # 替换为您在 Cloudflare Pages 中的项目名称
-        branch: main  # 确保与 Cloudflare 中配置的部署分支一致
-
+        projectName: onestepmumu-site
+        branch: main
+        directory: ./public  # 指向 Hugo 生成的输出目录
+        wranglerVersion: 2
