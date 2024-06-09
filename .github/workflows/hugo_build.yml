@@ -28,4 +28,3 @@ jobs:
         projectName: onestepmumu-site
         branch: main
         directory: ./public  # 指向 Hugo 生成的输出目录
-        wranglerVersion: 2
