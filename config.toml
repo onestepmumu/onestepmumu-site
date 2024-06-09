@@ -10,13 +10,13 @@ theme = "paper"
   color = 'linen'                           # linen, wheat, gray, light
 
   # header social icons
-  twitter = 'YOUR_TWITTER_ID'               # twitter.com/YOUR_TWITTER_ID
-  github = 'YOUR_GITHUB_ID'                 # github.com/YOUR_GITHUB_ID
+  twitter = 'MumuOneste33579'               # twitter.com/YOUR_TWITTER_ID
+  github = 'onestepmumu'                 # github.com/YOUR_GITHUB_ID
   rss = true                                # show rss icon
 
   # home page profile
   #avatar = 'GRAVATAR_EMAIL'                 # gravatar email or image url
-  #name = 'JOZEELIN'
+  #name = 'onestepmumu'
   #bio = 'YOUR_BIO'
 
 
