@@ -32,14 +32,14 @@ disqusShortname = 'YOUR_DISQUS_SHORTNAME'   # use disqus comments
   appleTouchIcon = "apple-touch-icon.png"   # customize the default Apple touch icon
 
   # giscus
-[params.giscus]
-  repo = 'YOUR_GISCUS_REPO'                 # see https://giscus.app for more details
-  repoId = 'YOUR_GISCUS_REPO_ID'
-  category = 'YOUR__GISCUS_CATEGORY'
-  categoryId = 'YOUR_GISCUS_CATEGORY_ID'
-  mapping = 'pathname'
-  theme = 'light'
-  lang = 'zh-CN'
+#[params.giscus]
+#  repo = 'YOUR_GISCUS_REPO'                 # see https://giscus.app for more details
+#  repoId = 'YOUR_GISCUS_REPO_ID'
+#  category = 'YOUR__GISCUS_CATEGORY'
+#  categoryId = 'YOUR_GISCUS_CATEGORY_ID'
+#  mapping = 'pathname'
+#  theme = 'light'
+#  lang = 'zh-CN'
 
 [[menu.main]]
     name = "About"
