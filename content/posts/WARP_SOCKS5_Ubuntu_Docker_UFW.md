@@ -37,36 +37,8 @@ sudo systemctl enable docker
 
 # 验证Docker安装
 sudo docker run hello-world
-
-
-Copy
-# 更新包索引
-sudo apt-get update
-
-# 安装必要的依赖
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-
-# 添加Docker的官方GPG密钥
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-# 设置Docker稳定版仓库
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-# 再次更新包索引
-sudo apt-get update
-
-# 安装Docker引擎
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
-# 启动Docker服务
-sudo systemctl start docker
-
-# 设置Docker开机自启
-sudo systemctl enable docker
-
-# 验证Docker安装
-sudo docker run hello-world
 ```
+
 验证Docker版本：
 ```bash
 docker --version
@@ -89,13 +61,13 @@ sudo docker run --privileged --restart=always -itd \
 ```
 这个命令会创建一个名为warp_socks的容器，并在主机的1080端口上暴露SOCKS5代理服务。
 
-## 2.3 验证WARP容器运行状态
+### 2.3 验证WARP容器运行状态
 运行以下命令来确认容器正在运行：
 
 ```bash
 sudo docker ps | grep warp_socks
 ```
-## 2.4 配置UFW防火墙
+### 2.4 配置UFW防火墙
 Ubuntu默认安装了UFW防火墙。如果没有安装，可以使用以下命令安装：
 
 ```bash
@@ -118,6 +90,55 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 注意：确保在启用UFW之前允许SSH连接，否则可能会断开与服务器的连接。
+
+### 2.5 配置 Linux IP 转发
+```bash
+cat /proc/sys/net/ipv4/ip_forward
+```
+如果输出为 0，表示 IP 转发当前是禁用的。如果输出为 1，则表示已启用。
+
+#### 2.5.1 启用 IP 转发
+- 方法 1：临时启用（重启后失效）
+  使用以下命令临时启用 IP 转发：
+
+```bash
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+注意：这种方法在系统重启后会失效。
+
+- 方法 2：永久启用
+  编辑 sysctl 配置文件：
+```bash
+sudo nano /etc/sysctl.conf
+```
+添加或修改以下行：
+```
+net.ipv4.ip_forward = 1
+```
+保存并关闭文件。
+应用更改：
+```bash
+sudo sysctl -p
+```
+- 方法 3：使用 sysctl 命令
+  使用 sysctl 命令直接修改内核参数：
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+注意：这种方法也是临时的，重启后会失效。
+
+#### 2.5.2 验证更改
+无论使用哪种方法，都可以通过以下命令验证更改是否生效：
+
+```bash
+cat /proc/sys/net/ipv4/ip_forward
+```
+输出应该为 1，表示 IP 转发已启用。
+
+#### 2.5.3 安全注意事项
+启用 IP 转发可能会增加系统的安全风险。确保配置适当的防火墙规则。
+如果使用 UFW（Uncomplicated Firewall），可能需要额外配置以允许转发流量。
+在云服务器上，可能需要在云平台的防火墙或安全组中做相应调整。
 
 ## 3. 客户端配置（Shadowrocket为例）
 ### 3.1 添加新的代理配置
