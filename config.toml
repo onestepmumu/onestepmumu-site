@@ -1,16 +1,17 @@
-#baseURL = 'latentpng.com'
+#baseURL = 'latentspaceroaming.xyz'
 languageCode = 'en-us'
-title = 'ONESTEPMUMU'
+title = 'OneStep-IndieDev'
 theme = "paper"
 
-#disqusShortname = 'YOUR_DISQUS_SHORTNAME'   # use disqus comments
+description = "A description of my site"
+keywords = ["hugo", "static site"]
 
 [params]
   # color style
   color = 'linen'                           # linen, wheat, gray, light
 
   # header social icons
-  twitter = 'onestepmumu'               # twitter.com/YOUR_TWITTER_ID
+  twitter = 'onestepmumu'               # x.com/YOUR_TWITTER_ID
   github = 'onestepmumu'                 # github.com/YOUR_GITHUB_ID
   rss = true                                # show rss icon
 
@@ -42,13 +43,13 @@ theme = "paper"
 #  lang = 'zh-CN'
 
 [[menu.main]]
-    name = "About"
+    name = "关于"
     url = "/about/"
     weight = 3
 
-[[menu.main]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 4
+#[[menu.main]]
+#    name = "Contact"
+#    url = "/contact/"
+#    weight = 4
 
 
