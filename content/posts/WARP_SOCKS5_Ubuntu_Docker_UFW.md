@@ -81,7 +81,7 @@ sudo apt-get install ufw
 sudo ufw allow ssh
 
 # 允许WARP SOCKS5代理端口
-sudo ufw allow 9091/tcp
+sudo ufw allow 10086/tcp
 
 # 启用UFW
 sudo ufw enable
@@ -147,7 +147,7 @@ cat /proc/sys/net/ipv4/ip_forward
 3. 选择"类型"为"Socks5"。
 4. 填写服务器信息：
    1. "地址"：填写运行Docker容器的服务器IP或域名
-   2. "端口"：9091
+   2. "端口"：10086
    3. "用户名"和"密码"留空
 5. 为配置命名，如"WARP SOCKS5"。
 6. 点击"完成"保存。
@@ -256,4 +256,4 @@ sudo sysctl -p
 4. Q: 如何更新WARP SOCKS5 Docker镜像？
     A: 使用sudo docker pull monius/docker-warp-socks命令拉取最新镜像，然后停止并删除旧容器，最后使用新镜像重新创建容器。
 5. Q: 为什么我的客户端无法连接到WARP代理？
-    A: 检查UFW防火墙设置，确保9091端口已开放。同时，验证服务器的安全组或网络ACL是否允许该端口的入站流量。
+    A: 检查UFW防火墙设置，确保10086端口已开放。同时，验证服务器的安全组或网络ACL是否允许该端口的入站流量。
