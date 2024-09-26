@@ -116,7 +116,56 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-## 5. 启动 V2Ray 服务
+## 5. 配置 Linux IP 转发
+```bash
+cat /proc/sys/net/ipv4/ip_forward
+```
+如果输出为 0，表示 IP 转发当前是禁用的。如果输出为 1，则表示已启用。
+
+### 5.1 启用 IP 转发
+- 方法 1：临时启用（重启后失效）
+  使用以下命令临时启用 IP 转发：
+
+```bash
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+注意：这种方法在系统重启后会失效。
+
+- 方法 2：永久启用
+  编辑 sysctl 配置文件：
+```bash
+sudo nano /etc/sysctl.conf
+```
+添加或修改以下行：
+```
+net.ipv4.ip_forward = 1
+```
+保存并关闭文件。
+应用更改：
+```bash
+sudo sysctl -p
+```
+- 方法 3：使用 sysctl 命令
+  使用 sysctl 命令直接修改内核参数：
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+注意：这种方法也是临时的，重启后会失效。
+
+### 5.2 验证更改
+无论使用哪种方法，都可以通过以下命令验证更改是否生效：
+
+```bash
+cat /proc/sys/net/ipv4/ip_forward
+```
+输出应该为 1，表示 IP 转发已启用。
+
+### 5.3 安全注意事项
+启用 IP 转发可能会增加系统的安全风险。确保配置适当的防火墙规则。
+如果使用 UFW（Uncomplicated Firewall），可能需要额外配置以允许转发流量。
+在云服务器上，可能需要在云平台的防火墙或安全组中做相应调整。
+
+## 6. 启动 V2Ray 服务
 启动 V2Ray 服务并设置为开机自启：
 
 ```bash
@@ -124,7 +173,7 @@ sudo systemctl start v2ray
 sudo systemctl enable v2ray
 ```
 
-## 6. 测试端口可访问性
+## 7. 测试端口可访问性
 安装 netcat：
 
 ```bash
@@ -141,25 +190,25 @@ nc -zv localhost 10010
 ```bash
 nc -zv localhost 10086
 ```
-## 7. 检查 V2Ray 服务状态
+## 8. 检查 V2Ray 服务状态
 检查 V2Ray 服务的状态：
 
 ```bash
 sudo systemctl status v2ray
 ```
-## 8. 查看日志
+## 9. 查看日志
 查看 V2Ray 的日志：
 
 ```bash
 sudo tail -f /var/log/v2ray/access.log
 sudo tail -f /var/log/v2ray/error.log
 ```
-## 9. 更新 V2Ray
-### 9.1 使用官方脚本更新
+## 10. 更新 V2Ray
+### 10.1 使用官方脚本更新
 ```bash
 bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
 ```
-### 9.2 手动更新
+### 10.2 手动更新
 检查最新版本：访问 V2Ray GitHub Releases
 下载最新版本：
 ```bash
@@ -181,13 +230,13 @@ sudo systemctl start v2ray
 ```bash
 v2ray -version
 ```
-## 9.3 更新后的注意事项
+## 10.3 更新后的注意事项
 - 检查配置兼容性
 - 测试服务是否正常
 - 查看更新日志
 - 备份重要数据
 
-## 10. 安全性增强
+## 11. 安全性增强
 - 定期更改 UUID 和端口
 - 使用 TLS 加密（如果尚未使用）
 - 启用防火墙并仅开放必要的端口
