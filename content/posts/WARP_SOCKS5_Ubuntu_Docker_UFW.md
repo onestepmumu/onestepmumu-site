@@ -56,6 +56,8 @@ sudo docker run --privileged --restart=always -itd \
     -v /lib/modules:/lib/modules \
     -v /etc/localtime:/etc/localtime:ro \
     -v /etc/timezone:/etc/timezone:ro \
+    -e SOCK_USER="用户名" \    
+    -e SOCK_PWD="密码" \
     -p 1080:1080 \
     monius/docker-warp-socks
 ```
@@ -67,6 +69,11 @@ sudo docker run --privileged --restart=always -itd \
 ```bash
 sudo docker ps | grep warp_socks
 ```
+运行以下命令来确认容器的端口映射
+```bash
+sudo docker port warp_socks
+```
+
 ### 2.4 配置UFW防火墙
 Ubuntu默认安装了UFW防火墙。如果没有安装，可以使用以下命令安装：
 
